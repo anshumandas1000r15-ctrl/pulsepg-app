@@ -819,25 +819,18 @@ export default function App() {
   const [toast, setToast] = useState(null);
 
   // User Profile & Auth State
-    // Platform Owner / Admin Email Whitelist
-  const ADMIN_EMAILS = ['anshumandas1000r15@gmail.com'];
-
-  // User Profile & Auth State (Default: Student View)
   const [user, setUser] = useState({
     id: 'usr-student-1',
-    full_name: 'Dr. Student',
-    email: '',
+    full_name: 'Dr. Aarav Sharma',
+    email: 'aarav.mbbs@aiims.edu',
     target_exam: 'NEET-PG',
     exam_date: '2027-03-15',
-    college: '',
-    is_premium: false,
-    is_admin: false,
+    college: 'BMCH / MKCG Medical College',
+    is_premium: true,
+    is_admin: true,
     daily_goal: 50,
-    current_streak: 1
+    current_streak: 6
   });
-
-  const isPlatformAdmin =
-    ADMIN_EMAILS.includes((user.email || '').trim().toLowerCase()) || user.is_admin === true;
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState('login'); // 'login' | 'signup'
   const [authForm, setAuthForm] = useState({ email: '', password: '', full_name: '' });
@@ -3289,21 +3282,15 @@ export default function App() {
           {activeTab === 'profile' && (
             <div className="space-y-4">
               {/* Sub-Navigation Pills */}
-                            {/* Sub-Navigation Pills */}
               <div className="flex flex-wrap gap-1.5 bg-white dark:bg-slate-900 p-2 rounded-2xl border border-slate-200 dark:border-slate-800">
                 {[
                   { id: 'settings', label: 'Student Profile', icon: User },
-                  ...(isPlatformAdmin
-                    ? [
-                        { id: 'admin_questions', label: 'Admin: Questions CRUD', icon: Edit3 },
-                        { id: 'admin_csv', label: 'Admin: CSV Bulk Upload', icon: Upload },
-                        { id: 'admin_subjects', label: 'Admin: Subjects & Stats', icon: Shield },
-                        { id: 'sql_schema', label: 'Supabase SQL & Setup', icon: Database }
-                      ]
-                    : [])
+                  { id: 'admin_questions', label: 'Admin: Questions CRUD', icon: Edit3 },
+                  { id: 'admin_csv', label: 'Admin: CSV Bulk Upload', icon: Upload },
+                  { id: 'admin_subjects', label: 'Admin: Subjects & Stats', icon: Shield },
+                  { id: 'sql_schema', label: 'Supabase SQL & Setup', icon: Database }
                 ].map((tab) => {
                   const Icon = tab.icon;
-
                   return (
                     <button
                       key={tab.id}
